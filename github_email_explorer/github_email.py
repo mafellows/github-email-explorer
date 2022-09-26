@@ -101,7 +101,7 @@ def users_email_info(action_user_ids, github_api_auth):
         try:
             ges.append(request_user_email(user_id, github_api_auth))
         except requests.exceptions.HTTPError as e:
-            print e
+            print(e)
             # Return email addresses that have received after exception happened
             return ges
 
@@ -178,7 +178,7 @@ def format_email(ges):
             try:
                 formatted_email.append('{} ({}) <{}> [{}]'.format(ge.name.encode('utf8'), ge.g_id, ge.email, ge.from_profile))
             except UnicodeEncodeError:
-                print ge.g_id, ge.email, ge.from_profile
+                print(ge.g_id, ge.email, ge.from_profile)
                 continue
 
     formatted_email = '\n'.join(formatted_email)
@@ -214,5 +214,5 @@ def repository(user_id, repo, github_api_auth):
 if __name__ == '__main__':
     # print request_user_email('yuecen')
     ges = collect_email_info('yuecen', 'github-email-explorer', ['star'])
-    print 'Total: {}/{}'.format(len([ge for ge in ges if ge.email]), len(ges))
-    print format_email(ges)
+    print('Total: {}/{}'.format(len([ge for ge in ges if ge.email]), len(ges)))
+    print(format_email(ges))
